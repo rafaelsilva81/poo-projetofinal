@@ -8,4 +8,4 @@ Desenvolvido para a disciplina de Programação Orientada a Objetos da Universid
 
 #### Desenvolvido por : 
 - Rafael Galdino da Silva ([@rafaelsilva81](https://github.com/rafaelsilva81 "@rafaelsilva81"))
-- Elias Dias de Araújo ([@Kashe18](https://github.com/Elias-Dias-De-Araujo "@Elias_Dias"))
+- Elias Dias de Araújo ([@Elias_Dias](https://github.com/Elias-Dias-De-Araujo "@Elias_Dias"))
