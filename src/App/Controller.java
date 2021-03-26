@@ -26,6 +26,7 @@ public class Controller {
 			for (int i = 0; i < in.getInventories().size(); i++) {
 				if (in.compare(in.getInventories().get(i), p) == 1) {
 					System.out.println("Produto já existente");
+					return false;
 				}
 			}
 
