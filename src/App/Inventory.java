@@ -17,7 +17,7 @@ public class Inventory implements Comparator<Product> {
 
 	@Override
 	public int compare(Product i1, Product i2) {
-		if (i1.getProductName().equalsIgnoreCase(i1.getProductName())) {
+		if (i1.getProductName().equalsIgnoreCase(i2.getProductName())) {
 			return 1;
 		} else {
 			return 0;
