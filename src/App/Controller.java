@@ -23,14 +23,14 @@ public class Controller {
 
 	public boolean registerProduct(Product p, Inventory in) throws InvalidArgument {
 		if (p instanceof Product) {
-			for (int i = 0; i < in.getInventories().size(); i++) {
-				if (in.compare(in.getInventories().get(i), p) == 1) {
+			for (int i = 0; i < in.getProductList().size(); i++) {
+				if (in.compare(in.getProductList().get(i), p) == 1) {
 					System.out.println("Produto já existente");
 					return false;
 				}
 			}
 
-			in.getInventories().add(p);
+			in.getProductList().add(p);
 
 			return true;
 		} else {
@@ -43,12 +43,11 @@ public class Controller {
 		boolean noStop = true;
 		try {
 			while (noStop) {
-				System.out.println("Você está editando o produto:");
-				// Mostrar o produto que ta sendo editado
-				//
-				// Mostrar possíveis edições
+				System.out.println("PAINEL DE EDIÇÃO DE PRODUTO : ");
+				System.out.println("Produto editado : " + in.getProductList().get(index).getProductName());
 
-				System.out.println("Digite um comando:");
+				System.out.println(":.Digite o campo que deseja alterar e o novo valor desse campo.:");
+				System.out.println(":.Ou digite \"parar\" para retornar ao painel principal.:");
 				System.out.print("$");
 				String line = sc.nextLine();
 				String[] cmd = line.split(" ");
@@ -56,18 +55,18 @@ public class Controller {
 
 				switch (comando) {
 				case "nome":
-					for (int i = 0; i < in.getInventories().size(); i++) {
-						if (in.getInventories().get(i).getProductName().equalsIgnoreCase(cmd[1])) {
+					for (int i = 0; i < in.getProductList().size(); i++) {
+						if (in.getProductList().get(i).getProductName().equalsIgnoreCase(cmd[1])) {
 							System.out.println("Nome de produto já existente");
 							break;
 						} else {
-							in.getInventories().get(index).setProductName(cmd[1]);
+							in.getProductList().get(index).setProductName(cmd[1]);
 						}
 					}
 					break;
 				case "categoria":
 					try {
-						in.getInventories().get(index).setCategory(cmd[1]);
+						in.getProductList().get(index).setCategory(cmd[1]);
 					} catch (Exception e) {
 						System.out.println("Argumento inválido");
 					}
@@ -75,7 +74,7 @@ public class Controller {
 					break;
 				case "quantidade":
 					try {
-						in.getInventories().get(index).setQuantity(Integer.parseInt(cmd[1]));
+						in.getProductList().get(index).setQuantity(Integer.parseInt(cmd[1]));
 					} catch (Exception e) {
 						System.out.println("Argumento inválido");
 					}
@@ -88,7 +87,7 @@ public class Controller {
 							System.out.println("Condição inválido");// Talvez um outro nome seja melhor no lugar de
 																	// condição.
 						} else {
-							in.getInventories().get(index).setCondition((cmd[1]));
+							in.getProductList().get(index).setCondition((cmd[1]));
 						}
 					} catch (Exception e) {
 						System.out.println("Argumento inválido");
@@ -109,18 +108,18 @@ public class Controller {
 			
 			
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Produto não encontrado");
+			System.out.println("Produto não encontrado... Retornando");
 		}
-		sc.close();
+		//sc.close();
 		return true;
 	}
 
 	public boolean removeProduct(int index, Inventory in) {
 		try {
-			String name = in.getInventories().get(index).getProductName();
-			for (int i = 0; i < in.getInventories().size(); i++) {
-				if (in.getInventories().get(i).getProductName().equalsIgnoreCase(name)) {
-					in.getInventories().remove(index);
+			String name = in.getProductList().get(index).getProductName();
+			for (int i = 0; i < in.getProductList().size(); i++) {
+				if (in.getProductList().get(i).getProductName().equalsIgnoreCase(name)) {
+					in.getProductList().remove(index);
 					return true;
 				}
 			}

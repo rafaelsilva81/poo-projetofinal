@@ -26,11 +26,11 @@ public class View {
 	}
 
 	public void show(Inventory e) {
-		Collections.sort(e.getInventories());
+		Collections.sort(e.getProductList());
 		String res = "";
 
-		for (int i = 0; i < e.getInventories().size(); i++) {
-			res += e.getInventories().get(i).show();
+		for (int i = 0; i < e.getProductList().size(); i++) {
+			res += e.getProductList().get(i).show();
 		}
 
 		if (res.equalsIgnoreCase("")) {

@@ -11,7 +11,7 @@ public class Inventory implements Comparator<Product> {
 		this.products = new ArrayList<Product>();
 	}
 
-	public ArrayList<Product> getInventories() {
+	public ArrayList<Product> getProductList() {
 		return products;
 	}
 

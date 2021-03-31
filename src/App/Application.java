@@ -48,6 +48,13 @@ public class Application {
 						System.out.println("Parametros passados incorretamente, verifique os dados enviados");
 					}
 					break;
+				case "editProduct" : 
+					try {
+						controller.editProduct(Integer.parseInt(cmd[1]), estoque);
+					} catch (Exception e) {
+						System.out.println("Parametros passados incorretamente, verifique os dados enviados");
+					}
+					break;
 				case "exit" :
 					System.out.println("Aplicação Finalizando...");
 					System.exit(0);
