@@ -2,6 +2,7 @@
 #### Universidade Federal do Ceará - Campus Quixadá 
 #### Curso de Ciências da Computação
 
+<img src="https://i.imgur.com/1PZzUOJ.png" alt="Carfix Logo" width="200"/>
 
 Sistema de Controle de estoque para oficinas mecânicas e outros nichos.
 Desenvolvido para a disciplina de Programação Orientada a Objetos da Universidade Federal do Ceará Campus Quixada. (Semestre 2020.2)
