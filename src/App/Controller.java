@@ -158,7 +158,6 @@ public class Controller {
 		Scanner sc = new Scanner(System.in);
 		boolean logged = false;
 		
-		int option = 0;
 		String user;
 		String password;
 		
@@ -166,37 +165,25 @@ public class Controller {
 		try {
 			
 			System.out.println("--------------- CARFIX LOGIN --------------\n"
-					+ "  :. Escolha uma opção :.\n"
-					+ "  1. LOGIN COMO FUNCIONÁRIO\n"
-					+ "  2. LOGIN COMO GERENTE/ADMINISTRADOR\n"
-					+ "  3. SAIR DA APLICAÇÃO\n"
+					+ "    :. FAÇA LOGIN ANTES DE CONTINUAR :.\n"
 					+ "-------------------------------------------\n");
 			
-			option = sc.nextInt();
-			
-			if (option == 3) {
-				System.out.println("Aplicação finalizando...");
-				System.exit(0);
-			}
+			String line = sc.nextLine();
+			String[] cmd = line.split(" ");
+			String comando = cmd[0];
+
 			
 			while (!logged) {
-				System.out.println("ENTRE COM SEU NOME DE USUÁRIO : (Ou envie BACK para retornar)");
-				user = sc.next();
-				if (user.equalsIgnoreCase("back")) {
-					return 0;
-				}
-				System.out.println("ENTRE COM SUA SENHA : ");
-				password = sc.next();
-				switch (option) {
-				case 1:
+				switch (comando) {
+				case "loginWorker":
 
-					Worker w1 = new Worker(user, password);
+					Worker w1 = new Worker(cmd[1], cmd[2]);
 					
 					for (int i = 0; i < wr.getWorkers().size(); i++) {
 						if (wr.compare(wr.getWorkers().get(i), w1) == 1) {
 							System.out.println("Logado com sucesso!\n\n");
 							logged = true;
-							return option;
+							return 1;
 						}
 					}
 					
@@ -204,25 +191,30 @@ public class Controller {
 					System.out.println("Não foi possível logar com as informações enviadas, tente novamente...\n\n");
 					break;
 				
-				case 2:
+				case "loginAdmin":
 					
-					Manager m1 = new Manager(user, password);
+					Manager m1 = new Manager(cmd[1], cmd[2]);
 					if (m1.getUsername().equals(MainManager.getUsername()) && m1.getPassword().equals(MainManager.getPassword())) {
 						System.out.println("Logado com sucesso!\n\n");
 						logged = true;
-						return option;
+						return 2;
 					}
 					
 					System.out.println("Não foi possível logar com as informações enviadas, tente novamente...\n\n");
 					break;
+				case "exit":
+					System.out.println("Aplicação finalizando...");
+					System.exit(0);
+					break;
 				default:
+					System.out.println("Envie um comando de login válido!");
 					break;
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Parametros enviados corretamente, envie um comando válido.");
+			System.out.println("Parametros enviados incorretamente");
 		}
-		return option;
+		return 0;
 	}
 
 }

@@ -74,6 +74,7 @@ public class Application {
 					System.exit(0);
 					break;
 				case "logoff" :
+					System.out.println("\n\n");
 					loginFlag = controller.loginRoutine();
 					break;
 				case "addWorker" :
