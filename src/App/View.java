@@ -27,8 +27,9 @@ public class View {
 
 	public void show(Inventory e) {
 		Collections.sort(e.getProductList());
-		String res = "";
-
+		String res = "\nNOME | CONDIÇÃO | CATEGORIA | QTD |\n"
+				+ "-------------------------------------------\n";
+		
 		for (int i = 0; i < e.getProductList().size(); i++) {
 			res += e.getProductList().get(i).show();
 		}

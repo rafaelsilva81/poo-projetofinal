@@ -8,7 +8,7 @@ public class Worker extends User implements Comparable<Worker> {
 
 	public String show() {
 
-		return this.getUsername() + " - " + this.getPassword();
+		return "Nome de usuário : " + this.getUsername() + " - Senha : " + this.getPassword() + "\n";
 
 	}
 

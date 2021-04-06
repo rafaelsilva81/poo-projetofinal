@@ -3,12 +3,15 @@ package App;
 import java.util.Scanner;
 
 public class Controller {
-
+	
+	WorkerRepository wr = new WorkerRepository();
+	
 	public boolean registerWorker(Worker w, WorkerRepository wr) throws InvalidArgument {
 		if (w instanceof Worker) {
 			for (int i = 0; i < wr.getWorkers().size(); i++) {
 				if (wr.compare(wr.getWorkers().get(i), w) == 1) {
 					System.out.println("funcionário já existente");
+					return false;
 				}
 			}
 
@@ -20,6 +23,24 @@ public class Controller {
 		}
 
 	}
+	
+	public boolean removeWorker(Worker w, WorkerRepository wr) throws InvalidArgument {
+		if (w instanceof Worker) {
+			for (int i = 0; i < wr.getWorkers().size(); i++) {
+				if (wr.compare(wr.getWorkers().get(i), w) == 1) {
+					wr.getWorkers().remove(i);
+					return true;
+				}
+			}
+
+			System.out.println("Não foi possível remover - Funcionário não encontrado");
+			return false;
+		} else {
+			throw new InvalidArgument("Fail: Objeto não é do tipo funcionário(worker)");
+		}
+
+	}
+	
 
 	public boolean registerProduct(Product p, Inventory in) throws InvalidArgument {
 		if (p instanceof Product) {
@@ -128,6 +149,80 @@ public class Controller {
 		}
 		return true;
 
+	}
+	
+	public int loginRoutine() {
+		
+		Manager MainManager = new Manager("admin", "admin");
+		
+		Scanner sc = new Scanner(System.in);
+		boolean logged = false;
+		
+		int option = 0;
+		String user;
+		String password;
+		
+		
+		try {
+			
+			System.out.println("--------------- CARFIX LOGIN --------------\n"
+					+ "  :. Escolha uma opção :.\n"
+					+ "  1. LOGIN COMO FUNCIONÁRIO\n"
+					+ "  2. LOGIN COMO GERENTE/ADMINISTRADOR\n"
+					+ "  3. SAIR DA APLICAÇÃO\n"
+					+ "-------------------------------------------\n");
+			
+			option = sc.nextInt();
+			
+			if (option == 3) {
+				System.out.println("Aplicação finalizando...");
+				System.exit(0);
+			}
+			
+			while (!logged) {
+				System.out.println("ENTRE COM SEU NOME DE USUÁRIO : (Ou envie BACK para retornar)");
+				user = sc.next();
+				if (user.equalsIgnoreCase("back")) {
+					return 0;
+				}
+				System.out.println("ENTRE COM SUA SENHA : ");
+				password = sc.next();
+				switch (option) {
+				case 1:
+
+					Worker w1 = new Worker(user, password);
+					
+					for (int i = 0; i < wr.getWorkers().size(); i++) {
+						if (wr.compare(wr.getWorkers().get(i), w1) == 1) {
+							System.out.println("Logado com sucesso!\n\n");
+							logged = true;
+							return option;
+						}
+					}
+					
+
+					System.out.println("Não foi possível logar com as informações enviadas, tente novamente...\n\n");
+					break;
+				
+				case 2:
+					
+					Manager m1 = new Manager(user, password);
+					if (m1.getUsername().equals(MainManager.getUsername()) && m1.getPassword().equals(MainManager.getPassword())) {
+						System.out.println("Logado com sucesso!\n\n");
+						logged = true;
+						return option;
+					}
+					
+					System.out.println("Não foi possível logar com as informações enviadas, tente novamente...\n\n");
+					break;
+				default:
+					break;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Parametros enviados corretamente, envie um comando válido.");
+		}
+		return option;
 	}
 
 }

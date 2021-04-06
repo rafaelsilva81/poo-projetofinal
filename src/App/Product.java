@@ -47,8 +47,11 @@ public class Product implements Comparable<Product> {
 	}
 
 	public String show() {
-		return this.getProductName() + " - " + this.getCategory() + " - " + this.getCondition() + " - "
-				+ this.getQuantity();
+		String r = this.getProductName() + " | " + this.getCategory() + " | " + this.getCondition() + " | "
+				+ this.getQuantity() + 
+				" |\n-------------------------------------------\n";
+		
+		return r;
 
 	}
 
